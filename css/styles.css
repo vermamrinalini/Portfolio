@@ -257,6 +257,18 @@ img {
     display: none;
 }
 
+.nav-link span {
+    font-family: monospace;
+    margin-right: 12px;
+    color: var(--azure-blue);
+    font-size: var(--font-size-sm);
+    opacity: 0.8;
+}
+
+.nav-link:hover span {
+    opacity: 1;
+}
+
 .nav-link:hover {
     color: var(--azure-blue-light);
     background: rgba(255, 255, 255, 0.03);
