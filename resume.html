@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mrinalini Verma - Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            color: #1a1a2e;
+            background: #fff;
+            padding: 0.5in;
+            max-width: 8.5in;
+            margin: 0 auto;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: #fff;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #0078D4;
+            margin-bottom: 20px;
+        }
+
+        .name {
+            font-size: 28pt;
+            font-weight: 700;
+            color: #0078D4;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .title {
+            font-size: 14pt;
+            font-weight: 500;
+            color: #4a4a6a;
+            margin-bottom: 12px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 10pt;
+            color: #555;
+        }
+
+        .contact-info a {
+            color: #0078D4;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 12pt;
+            font-weight: 700;
+            color: #0078D4;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e0e0e0;
+            margin-bottom: 12px;
+        }
+
+        /* Summary */
+        .summary {
+            text-align: justify;
+            color: #333;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-category {
+            margin-bottom: 8px;
+        }
+
+        .skill-category-title {
+            font-weight: 600;
+            color: #1a1a2e;
+            display: inline;
+        }
+
+        .skill-items {
+            display: inline;
+            color: #555;
+        }
+
+        /* Experience */
+        .experience-item {
+            margin-bottom: 16px;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 4px;
+        }
+
+        .company-name {
+            font-size: 12pt;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+
+        .job-title {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #0078D4;
+        }
+
+        .project-name {
+            font-size: 10pt;
+            font-style: italic;
+            color: #666;
+        }
+
+        .date-range {
+            font-size: 10pt;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .experience-details {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-details li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 4px;
+            color: #444;
+        }
+
+        .experience-details li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #0078D4;
+            font-size: 10pt;
+        }
+
+        .project-section {
+            margin-top: 10px;
+            padding-left: 12px;
+            border-left: 2px solid #e0e0e0;
+        }
+
+        .project-section .project-name {
+            font-weight: 600;
+            font-style: normal;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        /* Education & Certifications */
+        .edu-cert-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .education-item,
+        .cert-item {
+            margin-bottom: 8px;
+        }
+
+        .degree,
+        .cert-name {
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .school,
+        .cert-issuer {
+            color: #555;
+        }
+
+        .edu-date,
+        .cert-code {
+            font-size: 10pt;
+            color: #666;
+        }
+
+        /* Print Button */
+        .print-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            background: #0078D4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
+        }
+
+        .print-btn:hover {
+            background: #005a9e;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <h1 class="name">Mrinalini Verma</h1>
+        <p class="title">Azure DevOps Engineer</p>
+        <div class="contact-info">
+            <span class="contact-item">📧 <a
+                    href="mailto:mrinalinivverma@gmail.com">mrinalinivverma@gmail.com</a></span>
+
+            <span class="contact-item">🔗 <a href="https://linkedin.com/in/mrinalinivverma"
+                    target="_blank">linkedin.com/in/mrinalinivverma</a></span>
+            <span class="contact-item">💻 <a href="https://github.com/vermamrinalini"
+                    target="_blank">github.com/vermamrinalini</a></span>
+            <span class="contact-item">✍️ <a href="https://mrinalinivverma.hashnode.dev"
+                    target="_blank">mrinalinivverma.hashnode.dev</a></span>
+        </div>
+    </header>
+
+    <!-- Summary -->
+    <section class="section">
+        <h2 class="section-title">Professional Summary</h2>
+        <p class="summary">
+            Experienced Azure DevOps Engineer with over 5 years of expertise in cloud management, automation, and CI/CD
+            pipelines. Proven track record of designing and implementing Infrastructure as Code (IaC) using Terraform
+            and automating 3-tier applications using DevOps tools. Strong communicator with experience handling projects
+            independently in fast-paced environments. Certified Azure Administrator & DevOps Specialist.
+        </p>
+    </section>
+
+    <!-- Technical Skills -->
+    <section class="section">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skill-category">
+            <span class="skill-category-title">Cloud Platforms:</span>
+            <span class="skill-items">Azure, AWS, Lambda, CloudWatch</span>
+        </div>
+        <div class="skill-category">
+            <span class="skill-category-title">CI/CD & DevOps:</span>
+            <span class="skill-items">Azure DevOps, Jenkins, GitHub Actions, Terraform, Docker, AKS, Argo CD,
+                SonarQube</span>
+        </div>
+        <div class="skill-category">
+            <span class="skill-category-title">Monitoring:</span>
+            <span class="skill-items">Prometheus, Grafana, Datadog, Azure Monitor</span>
+        </div>
+        <div class="skill-category">
+            <span class="skill-category-title">Scripting:</span>
+            <span class="skill-items">PowerShell, Bash, Python, Go</span>
+        </div>
+        <div class="skill-category">
+            <span class="skill-category-title">Databases:</span>
+            <span class="skill-items">SQL, Oracle</span>
+        </div>
+        <div class="skill-category">
+            <span class="skill-category-title">Web/App Servers:</span>
+            <span class="skill-items">Apache, Nginx, Tomcat, JBoss, WebLogic, WebSphere</span>
+        </div>
+        <div class="skill-category">
+            <span class="skill-category-title">Tools:</span>
+            <span class="skill-items">Git, JIRA, Azure Boards, SFTP, GPG, SSL/TLS</span>
+        </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="section">
+        <h2 class="section-title">Professional Experience</h2>
+
+        <!-- AT&T -->
+        <div class="experience-item">
+            <div class="experience-header">
+                <div>
+                    <p class="company-name">AT&T</p>
+                    <p class="job-title">Application Owner</p>
+                    <p class="project-name">Enterprise Service Bus</p>
+                </div>
+                <span class="date-range">2025 – Present</span>
+            </div>
+            <ul class="experience-details">
+                <li>Handling maintenance and development of the Enterprise Service Bus application</li>
+                <li>Coordinated with multiple interface and internal teams to plan and execute application tasks</li>
+                <li>Set up two-way SFTP connectivity and generated/exported GPG public keys for secure file transfers
+                </li>
+                <li>Scheduled jobs through Crontab, monitored jobs, and managed application releases</li>
+                <li>Logged, tracked, and resolved root causes of issues</li>
+                <li>Created automation scripts in Bash and Python, reducing manual effort by 80%</li>
+            </ul>
+        </div>
+
+        <!-- Tech Mahindra -->
+        <div class="experience-item">
+            <div class="experience-header">
+                <div>
+                    <p class="company-name">Tech Mahindra</p>
+                    <p class="job-title">DevOps Engineer</p>
+                </div>
+                <span class="date-range">2019 – Jun 2025</span>
+            </div>
+            <ul class="experience-details">
+                <li>Designed and maintained CI/CD pipelines using Azure DevOps and GitHub Actions to automate software
+                    build, test, and deployment processes</li>
+                <li>Created Infrastructure as Code (IaC) using Terraform to provision and manage Azure resources
+                    including Virtual Networks, Storage Accounts, and App Services</li>
+                <li>Handled SSL/TLS certificate management for application security and ensured secure communications
+                </li>
+            </ul>
+
+            <div class="project-section">
+                <p class="project-name">Project: WIGT</p>
+                <ul class="experience-details">
+                    <li>Developed CI/CD pipelines with Jenkins and Azure DevOps for automated builds and deployments
+                    </li>
+                    <li>Configured Datadog and Azure Monitor for real-time performance tracking</li>
+                    <li>Managed Git repositories, resolved merge conflicts, and optimized branching strategies</li>
+                    <li>Enhanced security with automated code scans and patching in CI/CD pipelines</li>
+                </ul>
+            </div>
+
+            <div class="project-section">
+                <p class="project-name">Project: MNAT</p>
+                <ul class="experience-details">
+                    <li>Developed IaC using Terraform and ARM templates to automate Azure resource creation</li>
+                    <li>Created CI/CD pipelines using Jenkins for Java-based application automation</li>
+                    <li>Wrote shell scripts for automating routine infrastructure tasks and deployment steps</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications -->
+    <section class="section">
+        <h2 class="section-title">Education & Certifications</h2>
+        <div class="edu-cert-grid">
+            <div>
+                <div class="education-item">
+                    <p class="degree">B.Tech in Computer Science Engineering</p>
+                    <p class="school">SRM University</p>
+                    <p class="edu-date">2015 – 2019</p>
+                </div>
+            </div>
+            <div>
+                <div class="cert-item">
+                    <p class="cert-name">AZ-104: Azure Administrator Associate</p>
+                    <p class="cert-issuer">Microsoft Certified</p>
+                </div>
+                <div class="cert-item">
+                    <p class="cert-name">AZ-900: Microsoft Azure Fundamentals</p>
+                    <p class="cert-issuer">Microsoft Certified</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Print Button -->
+    <button class="print-btn no-print" onclick="window.print()">
+        🖨️ Print / Save as PDF
+    </button>
+</body>
+
+</html>

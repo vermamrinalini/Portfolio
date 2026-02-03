@@ -1,0 +1,231 @@
+/* ===================================
+   MAIN JAVASCRIPT
+   Portfolio Site - Mrinalini Verma
+   =================================== */
+
+// DOM Elements
+const navbar = document.getElementById('navbar');
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
+const navLinks = document.querySelectorAll('.nav-link');
+
+// ===================================
+// MOBILE NAVIGATION TOGGLE
+// ===================================
+navToggle?.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    navToggle.classList.toggle('active');
+});
+
+// Close mobile menu when clicking a link
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+    });
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+    }
+});
+
+// ===================================
+// NAVBAR SCROLL EFFECT
+// ===================================
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    // Add shadow on scroll
+    if (currentScroll > 50) {
+        navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
+    } else {
+        navbar.style.boxShadow = 'none';
+    }
+    
+    lastScroll = currentScroll;
+});
+
+// ===================================
+// SMOOTH SCROLL FOR ANCHOR LINKS
+// ===================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// ===================================
+// SCROLL ANIMATIONS (Intersection Observer)
+// ===================================
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+};
+
+const animateOnScroll = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+            entry.target.style.animationDelay = entry.target.dataset.delay || '0s';
+            observer.unobserve(entry.target);
+        }
+    });
+};
+
+const scrollObserver = new IntersectionObserver(animateOnScroll, observerOptions);
+
+// Observe all sections and cards
+document.querySelectorAll('.section, .glass-card, .timeline-item, .skill-category').forEach((el, index) => {
+    el.dataset.delay = `${index * 0.1}s`;
+    scrollObserver.observe(el);
+});
+
+// ===================================
+// ACTIVE NAVIGATION HIGHLIGHT
+// ===================================
+const sections = document.querySelectorAll('section[id]');
+
+const highlightNavOnScroll = () => {
+    const scrollY = window.pageYOffset;
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+};
+
+window.addEventListener('scroll', highlightNavOnScroll);
+
+// ===================================
+// FORM SUBMISSION HANDLING
+// ===================================
+const contactForm = document.querySelector('.contact-form');
+
+contactForm?.addEventListener('submit', async (e) => {
+    const submitBtn = contactForm.querySelector('.btn-submit');
+    const originalText = submitBtn.innerHTML;
+    
+    // Show loading state
+    submitBtn.innerHTML = `
+        <svg class="spin" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
+        </svg>
+        Sending...
+    `;
+    submitBtn.disabled = true;
+    
+    // Note: The form will submit to Formspree
+    // Add success/error handling here if needed
+    
+    // Reset button after a delay (Formspree handles redirect)
+    setTimeout(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }, 3000);
+});
+
+// ===================================
+// SKILL TAG HOVER EFFECTS
+// ===================================
+document.querySelectorAll('.skill-tag').forEach(tag => {
+    tag.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-3px) scale(1.05)';
+    });
+    
+    tag.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+    });
+});
+
+// ===================================
+// TYPING ANIMATION FOR HERO (Optional)
+// ===================================
+const typingText = document.querySelector('.hero-tagline');
+const originalText = typingText?.textContent;
+
+function typeWriter(element, text, speed = 50) {
+    let i = 0;
+    element.textContent = '';
+    
+    function type() {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, speed);
+        }
+    }
+    
+    type();
+}
+
+// Uncomment to enable typing animation
+// if (typingText && originalText) {
+//     setTimeout(() => typeWriter(typingText, originalText), 1000);
+// }
+
+// ===================================
+// PARALLAX EFFECT FOR GRADIENT ORBS
+// ===================================
+const orbs = document.querySelectorAll('.gradient-orb');
+
+document.addEventListener('mousemove', (e) => {
+    const mouseX = e.clientX / window.innerWidth;
+    const mouseY = e.clientY / window.innerHeight;
+    
+    orbs.forEach((orb, index) => {
+        const speed = (index + 1) * 30;
+        const x = (mouseX - 0.5) * speed;
+        const y = (mouseY - 0.5) * speed;
+        
+        orb.style.transform = `translate(${x}px, ${y}px)`;
+    });
+});
+
+// ===================================
+// LOADING STATE
+// ===================================
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+    
+    // Trigger initial animations
+    document.querySelector('.hero-content')?.classList.add('animate-fade-in');
+});
+
+// ===================================
+// CONSOLE EASTER EGG
+// ===================================
+console.log(`
+%c👋 Hello, fellow developer!
+%cLooking at the code? Nice!
+Feel free to connect with me on LinkedIn.
+
+GitHub: github.com/vermamrinalini
+LinkedIn: linkedin.com/in/mrinalinivverma
+`, 
+'color: #0078D4; font-size: 16px; font-weight: bold;',
+'color: #50E6FF; font-size: 12px;'
+);
