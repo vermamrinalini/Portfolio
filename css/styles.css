@@ -210,21 +210,22 @@ img {
 }
 
 .nav-container {
-    padding: 0;
+    padding: 0 32px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    /* Center items in sidebar */
     height: 100%;
     width: 100%;
 }
 
 .nav-logo {
-    margin-bottom: 40px;
-    padding-left: 40px;
+    margin-bottom: 60px;
 }
 
 .logo-text {
-    font-size: var(--font-size-2xl);
+    font-size: var(--font-size-3xl);
+    /* Larger logo for sidebar */
     font-weight: 800;
     background: var(--azure-gradient);
     -webkit-background-clip: text;
@@ -235,51 +236,44 @@ img {
 .nav-menu {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    align-items: center;
+    /* Center links */
+    gap: 32px;
     width: 100%;
-    padding-left: 0;
 }
 
 .nav-link {
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-lg);
     font-weight: 500;
-    color: var(--text-muted);
-    padding: 10px 10px 10px 40px;
+    color: var(--text-secondary);
+    padding: 8px 0;
     position: relative;
     width: 100%;
-    text-align: left;
-    border-left: 3px solid transparent;
-    transition: all 0.3s ease;
+    text-align: center;
 }
 
 .nav-link::after {
-    display: none;
-}
-
-.nav-link span {
-    font-family: monospace;
-    margin-right: 12px;
-    color: var(--azure-blue);
-    font-size: var(--font-size-sm);
-    opacity: 0.8;
-}
-
-.nav-link:hover span {
-    opacity: 1;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--azure-blue);
+    transition: var(--transition-base);
 }
 
 .nav-link:hover {
     color: var(--azure-blue-light);
-    background: rgba(255, 255, 255, 0.03);
-    padding-left: 45px;
+}
+
+.nav-link:hover::after {
+    width: 50%;
 }
 
 .nav-link.active {
-    color: var(--text-primary);
-    border-left-color: var(--azure-blue);
-    background: linear-gradient(90deg, rgba(0, 120, 212, 0.1) 0%, transparent 100%);
-    font-weight: 600;
+    color: var(--azure-blue);
 }
 
 .nav-toggle {
@@ -1072,18 +1066,16 @@ img {
         transition: var(--transition-base);
         border-bottom: 1px solid var(--glass-border);
         align-items: center;
-        /* Center mobile menu items */
+        /* Center on mobile */
     }
 
     .nav-link {
         text-align: center;
-        padding: 10px;
-        border-left: none;
     }
 
-    .nav-link:hover {
-        padding-left: 10px;
-        background: none;
+    /* Hide numbers on mobile */
+    .nav-link::before {
+        display: none;
     }
 
     .nav-menu.active {
