@@ -210,22 +210,21 @@ img {
 }
 
 .nav-container {
-    padding: 0 32px;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    /* Center items in sidebar */
+    align-items: flex-start;
     height: 100%;
     width: 100%;
 }
 
 .nav-logo {
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+    padding-left: 40px;
 }
 
 .logo-text {
-    font-size: var(--font-size-3xl);
-    /* Larger logo for sidebar */
+    font-size: var(--font-size-2xl);
     font-weight: 800;
     background: var(--azure-gradient);
     -webkit-background-clip: text;
@@ -236,44 +235,39 @@ img {
 .nav-menu {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    /* Center links */
-    gap: 32px;
+    align-items: flex-start;
+    gap: 16px;
     width: 100%;
+    padding-left: 0;
 }
 
 .nav-link {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-base);
     font-weight: 500;
-    color: var(--text-secondary);
-    padding: 8px 0;
+    color: var(--text-muted);
+    padding: 10px 10px 10px 40px;
     position: relative;
     width: 100%;
-    text-align: center;
+    text-align: left;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
 }
 
 .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background: var(--azure-blue);
-    transition: var(--transition-base);
+    display: none;
 }
 
 .nav-link:hover {
     color: var(--azure-blue-light);
-}
-
-.nav-link:hover::after {
-    width: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    padding-left: 45px;
 }
 
 .nav-link.active {
-    color: var(--azure-blue);
+    color: var(--text-primary);
+    border-left-color: var(--azure-blue);
+    background: linear-gradient(90deg, rgba(0, 120, 212, 0.1) 0%, transparent 100%);
+    font-weight: 600;
 }
 
 .nav-toggle {
@@ -1065,6 +1059,19 @@ img {
         visibility: hidden;
         transition: var(--transition-base);
         border-bottom: 1px solid var(--glass-border);
+        align-items: center;
+        /* Center mobile menu items */
+    }
+
+    .nav-link {
+        text-align: center;
+        padding: 10px;
+        border-left: none;
+    }
+
+    .nav-link:hover {
+        padding-left: 10px;
+        background: none;
     }
 
     .nav-menu.active {
