@@ -1,0 +1,9 @@
+Options -Indexes
+
+<FilesMatch "\.(html|css|js|png|jpg|jpeg|gif|ico|svg|pdf)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+ErrorDocument 403 /index.html
+ErrorDocument 404 /index.html

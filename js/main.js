@@ -40,14 +40,14 @@ let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
-    
+
     // Add shadow on scroll
     if (currentScroll > 50) {
         navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
     } else {
         navbar.style.boxShadow = 'none';
     }
-    
+
     lastScroll = currentScroll;
 });
 
@@ -77,10 +77,12 @@ const observerOptions = {
 };
 
 const animateOnScroll = (entries, observer) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
+            // Stagger animation based on index in current batch
+            const delay = index * 0.05;
+            entry.target.style.animationDelay = `${delay}s`;
             entry.target.classList.add('animate-fade-in');
-            entry.target.style.animationDelay = entry.target.dataset.delay || '0s';
             observer.unobserve(entry.target);
         }
     });
@@ -89,8 +91,7 @@ const animateOnScroll = (entries, observer) => {
 const scrollObserver = new IntersectionObserver(animateOnScroll, observerOptions);
 
 // Observe all sections and cards
-document.querySelectorAll('.section, .glass-card, .timeline-item, .skill-category').forEach((el, index) => {
-    el.dataset.delay = `${index * 0.1}s`;
+document.querySelectorAll('.section, .glass-card, .timeline-item, .skill-category').forEach((el) => {
     scrollObserver.observe(el);
 });
 
@@ -101,12 +102,12 @@ const sections = document.querySelectorAll('section[id]');
 
 const highlightNavOnScroll = () => {
     const scrollY = window.pageYOffset;
-    
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop - 100;
         const sectionHeight = section.offsetHeight;
         const sectionId = section.getAttribute('id');
-        
+
         if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
             navLinks.forEach(link => {
                 link.classList.remove('active');
@@ -128,7 +129,7 @@ const contactForm = document.querySelector('.contact-form');
 contactForm?.addEventListener('submit', async (e) => {
     const submitBtn = contactForm.querySelector('.btn-submit');
     const originalText = submitBtn.innerHTML;
-    
+
     // Show loading state
     submitBtn.innerHTML = `
         <svg class="spin" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -137,10 +138,10 @@ contactForm?.addEventListener('submit', async (e) => {
         Sending...
     `;
     submitBtn.disabled = true;
-    
+
     // Note: The form will submit to Formspree
     // Add success/error handling here if needed
-    
+
     // Reset button after a delay (Formspree handles redirect)
     setTimeout(() => {
         submitBtn.innerHTML = originalText;
@@ -152,11 +153,11 @@ contactForm?.addEventListener('submit', async (e) => {
 // SKILL TAG HOVER EFFECTS
 // ===================================
 document.querySelectorAll('.skill-tag').forEach(tag => {
-    tag.addEventListener('mouseenter', function() {
+    tag.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-3px) scale(1.05)';
     });
-    
-    tag.addEventListener('mouseleave', function() {
+
+    tag.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0) scale(1)';
     });
 });
@@ -170,7 +171,7 @@ const originalText = typingText?.textContent;
 function typeWriter(element, text, speed = 50) {
     let i = 0;
     element.textContent = '';
-    
+
     function type() {
         if (i < text.length) {
             element.textContent += text.charAt(i);
@@ -178,7 +179,7 @@ function typeWriter(element, text, speed = 50) {
             setTimeout(type, speed);
         }
     }
-    
+
     type();
 }
 
@@ -195,12 +196,12 @@ const orbs = document.querySelectorAll('.gradient-orb');
 document.addEventListener('mousemove', (e) => {
     const mouseX = e.clientX / window.innerWidth;
     const mouseY = e.clientY / window.innerHeight;
-    
+
     orbs.forEach((orb, index) => {
         const speed = (index + 1) * 30;
         const x = (mouseX - 0.5) * speed;
         const y = (mouseY - 0.5) * speed;
-        
+
         orb.style.transform = `translate(${x}px, ${y}px)`;
     });
 });
@@ -210,7 +211,7 @@ document.addEventListener('mousemove', (e) => {
 // ===================================
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
-    
+
     // Trigger initial animations
     document.querySelector('.hero-content')?.classList.add('animate-fade-in');
 });
@@ -225,7 +226,7 @@ Feel free to connect with me on LinkedIn.
 
 GitHub: github.com/vermamrinalini
 LinkedIn: linkedin.com/in/mrinalinivverma
-`, 
-'color: #0078D4; font-size: 16px; font-weight: bold;',
-'color: #50E6FF; font-size: 12px;'
+`,
+    'color: #0078D4; font-size: 16px; font-weight: bold;',
+    'color: #50E6FF; font-size: 12px;'
 );

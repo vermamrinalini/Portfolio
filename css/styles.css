@@ -7,28 +7,28 @@
     --azure-blue-light: #50E6FF;
     --azure-blue-dark: #004E8C;
     --azure-gradient: linear-gradient(135deg, #0078D4 0%, #50E6FF 100%);
-    
+
     /* Dark Theme Colors */
     --bg-primary: #0a0a0f;
     --bg-secondary: #12121a;
     --bg-tertiary: #1a1a25;
     --bg-card: rgba(26, 26, 37, 0.7);
-    
+
     /* Text Colors */
     --text-primary: #ffffff;
     --text-secondary: #b4b4c2;
     --text-muted: #6b6b7a;
-    
+
     /* Glassmorphism */
     --glass-bg: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    
+
     /* Spacing */
     --section-padding: 100px 0;
     --container-max: 1200px;
     --container-padding: 0 24px;
-    
+
     /* Typography */
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-size-xs: 0.75rem;
@@ -40,12 +40,12 @@
     --font-size-3xl: 2rem;
     --font-size-4xl: 2.5rem;
     --font-size-5xl: 3.5rem;
-    
+
     /* Animations */
     --transition-fast: 0.15s ease;
     --transition-base: 0.3s ease;
     --transition-slow: 0.5s ease;
-    
+
     /* Border Radius */
     --radius-sm: 8px;
     --radius-md: 12px;
@@ -56,7 +56,9 @@
 /* ===================================
    RESET & BASE STYLES
    =================================== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -346,9 +348,12 @@ img {
 }
 
 @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0) scale(1);
     }
+
     50% {
         transform: translateY(-30px) scale(1.05);
     }
@@ -463,9 +468,12 @@ img {
 }
 
 @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(10px);
     }
@@ -1008,6 +1016,7 @@ img {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -1015,7 +1024,7 @@ img {
 }
 
 .animate-fade-in {
-    animation: fadeInUp 0.6s ease forwards;
+    animation: fadeInUp 0.4s ease forwards;
     opacity: 0;
 }
 
@@ -1026,12 +1035,12 @@ img {
     .about-content {
         grid-template-columns: 1fr;
     }
-    
+
     .about-stats {
         flex-direction: row;
         justify-content: center;
     }
-    
+
     .contact-wrapper {
         grid-template-columns: 1fr;
     }
@@ -1041,7 +1050,7 @@ img {
     :root {
         --section-padding: 60px 0;
     }
-    
+
     .nav-menu {
         position: fixed;
         top: 70px;
@@ -1058,56 +1067,56 @@ img {
         transition: var(--transition-base);
         border-bottom: 1px solid var(--glass-border);
     }
-    
+
     .nav-menu.active {
         transform: translateY(0);
         opacity: 1;
         visibility: visible;
     }
-    
+
     .nav-toggle {
         display: flex;
     }
-    
+
     .hero-name {
         font-size: var(--font-size-3xl);
     }
-    
+
     .hero-subtitle {
         font-size: var(--font-size-xl);
     }
-    
+
     .section-title {
         font-size: var(--font-size-2xl);
     }
-    
+
     .about-stats {
         flex-direction: column;
     }
-    
+
     .timeline {
         padding-left: 24px;
     }
-    
+
     .timeline::before {
         left: 0;
     }
-    
+
     .timeline-marker {
         left: -24px;
         width: 14px;
         height: 14px;
     }
-    
+
     .timeline-header {
         flex-direction: column;
     }
-    
+
     .hero-buttons {
         flex-direction: column;
         width: 100%;
     }
-    
+
     .hero-buttons .btn {
         width: 100%;
         max-width: 280px;
@@ -1118,16 +1127,16 @@ img {
     .skills-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .cert-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .cert-card {
         flex-direction: column;
         text-align: center;
     }
-    
+
     .education-card {
         flex-direction: column;
         text-align: center;
