@@ -127,8 +127,11 @@ window.addEventListener('scroll', highlightNavOnScroll);
 const contactForm = document.querySelector('.contact-form');
 
 contactForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
     const submitBtn = contactForm.querySelector('.btn-submit');
     const originalText = submitBtn.innerHTML;
+    const formData = new FormData(contactForm);
+    const formAction = contactForm.getAttribute('action');
 
     // Show loading state
     submitBtn.innerHTML = `
@@ -139,14 +142,55 @@ contactForm?.addEventListener('submit', async (e) => {
     `;
     submitBtn.disabled = true;
 
-    // Note: The form will submit to Formspree
-    // Add success/error handling here if needed
+    // Check if using placeholder ID (Fallback to mailto)
+    if (formAction.includes('YOUR_FORMSPREE_ID')) {
+        const name = formData.get('name');
+        const message = formData.get('message');
+        const mailtoLink = `mailto:mrinalinivverma@gmail.com?subject=Portfolio Contact from ${name}&body=${encodeURIComponent(message)}`;
 
-    // Reset button after a delay (Formspree handles redirect)
-    setTimeout(() => {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    }, 3000);
+        setTimeout(() => {
+            window.location.href = mailtoLink;
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            alert("This form is not yet connected to a backend service. Opening your default email client instead.");
+        }, 1000);
+        return;
+    }
+
+    // If configured, try to submit via AJAX to Formspree
+    try {
+        const response = await fetch(formAction, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            submitBtn.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Sent!
+            `;
+            contactForm.reset();
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 5000);
+        } else {
+            throw new Error('Form submission failed');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        submitBtn.innerHTML = "Error!";
+        alert("There was a problem sending your message. Please try again or email directly.");
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }, 3000);
+    }
 });
 
 // ===================================
